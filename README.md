@@ -14,6 +14,11 @@ Tests can be run by running `make test && ./testsvr` and opening a browser to po
 As a non-web developer, I do not have the skill set to properly validate that all fetch
 behavior works as expected, so the only tests are "can it get" and "can it cancel".
 
+The `wasm_exec.js` for tests is badly minified by hand to make the total size of the JS
+source code less than the total size of the Go source code, so that github won't detect
+the project as JS.  It should not be used and exists only to support tests.  It may not
+work in your browser.
+
 ## License
 Parts of this code are based on the original wasm based round tripper, and the reader
 implementations are copied directly from the original, and put in their own file.  I
