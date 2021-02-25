@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="wasm_exec.js"></script>
+    <script>
+        go = new Go();
+        WebAssembly.instantiateStreaming(fetch("/app.wasm"), go.importObject).then(result => {
+            go.run(result.instance);
+        });
+    </script>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <td>Test</td>
+        <td>Response</td>
+        <td>Error</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Basic</td>
+        <td id="BasicResponse"></td>
+        <td id="BasicError"></td>
+    </tr>
+    <tr>
+        <td>Cancel</td>
+        <td id="CancelResponse"></td>
+        <td id="CancelError"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
