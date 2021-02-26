@@ -8,8 +8,6 @@ import (
 
 var jstHeaders = js.Global().Get("Headers")
 
-type Headers map[string]string
-
 func (h Headers) asJS() js.Value {
 	jsHeaders := jstHeaders.New()
 	for k, v := range h {
