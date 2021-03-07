@@ -5,7 +5,6 @@ package fetch
 import (
 	"context"
 	"errors"
-	"fmt"
 	"io"
 	"syscall/js"
 )
@@ -82,7 +81,7 @@ func Do(ctx context.Context, req *Request) (*Response, error) {
 		return nil
 	})
 	jsfFailure := js.FuncOf(func(jsThis js.Value, jsArgs []js.Value) interface{} {
-		chErr <- fmt.Errorf("fetch() failed: %s", jsArgs[0].Get("message").String())
+		chErr <- errors.New("fetch failed: " + jsArgs[0].Get("message").String())
 		return nil
 	})
 	jsFetchPromise.Call("then", jsfSuccess, jsfFailure)
@@ -102,4 +101,3 @@ func Do(ctx context.Context, req *Request) (*Response, error) {
 		return nil, err
 	}
 }
-
